@@ -124,7 +124,7 @@ window.addEventListener("load", function() {
         if (localStorage.hNotifications === "true") {
             notificationsInput.setAttribute('checked', 'checked');
         }
-        notificationsInput.addEventListener("change", toggleStorage);
+        notificationsInput.addEventListener("change", grantNotifications);
         
         let notificationsLabel = document.createElement('label');
         notificationsLabel.setAttribute('for', 'checkbox');
@@ -160,6 +160,24 @@ window.addEventListener("load", function() {
         document.body.appendChild(menu);
     }
 
+    function grantNotifications() {
+        if (localStorage["hNotifications"] && localStorage["hNotifications"] == "true") {
+            localStorage["hNotifications"] = "false";
+        } else {
+            if (Notification.permission !== "granted") {
+                Notification.requestPermission(function(permission) {
+                    if (permission === "granted") {
+                        localStorage["hNotifications"] = "true";
+                    } else {
+                        alert("You will need to need desktop notifcations for DH3 alerts to work.")
+                    }
+                  });
+            } else {
+                localStorage["hNotifications"] = "true";
+            }
+        }
+    }
+
     function toggleStorage() {
         let name = this.getAttribute('data-storage');
         if (localStorage[name] && localStorage[name] == "true") {
@@ -175,7 +193,19 @@ window.addEventListener("load", function() {
     }
 
     function init() {
-        console.log("init")
+        // Furnace
+        var furnaceObserver = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutationRecord) {
+                if (document.getElementById("notification-furnace").style.display === "none") {
+                    if ((localStorage.hNotifications === "true") && (localStorage.hFurnace === "true")) {
+                        var notification = new Notification("Furnace Ready",{ icon: 'images/silverFurnaceOn.gif' });
+                    }
+                }
+            });    
+        });
+    
+        var furnaceTarget = document.getElementById('notification-furnace');
+        furnaceObserver.observe(furnaceTarget, { attributes : true, attributeFilter : ['style'] });
     }
 });
 
