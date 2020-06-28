@@ -157,6 +157,94 @@ window.addEventListener("load", function() {
 
         menu.appendChild(furnaceInputContainer);
 
+        // SD Pot Notifications Checkbox
+        let SDPotInputContainer = document.createElement('div');
+        SDPotInputContainer.setAttribute('class', 'dh3-helper-inputContainer dh3-helper-inputContainer-sub');
+        let SDPotInput = document.createElement('input');
+        SDPotInput.setAttribute('type', 'checkbox');
+        SDPotInput.setAttribute('name', 'dh3-notificationsInput');
+        SDPotInput.setAttribute('data-storage', 'hSDPot');
+        
+        if (localStorage.hSDPot === "true") {
+            SDPotInput.setAttribute('checked', 'checked');
+        }
+        SDPotInput.addEventListener("change", toggleStorage);
+        
+        let SDPotLabel = document.createElement('label');
+        SDPotLabel.setAttribute('for', 'checkbox');
+        SDPotLabel.innerText = "SD Pot Notifications";
+
+        SDPotInputContainer.append(SDPotInput);
+        SDPotInputContainer.append(SDPotLabel);
+
+        menu.appendChild(SDPotInputContainer);
+
+        // Woodcutting Notifications Checkbox
+        let woodcuttingInputContainer = document.createElement('div');
+        woodcuttingInputContainer.setAttribute('class', 'dh3-helper-inputContainer dh3-helper-inputContainer-sub');
+        let woodcuttingInput = document.createElement('input');
+        woodcuttingInput.setAttribute('type', 'checkbox');
+        woodcuttingInput.setAttribute('name', 'dh3-notificationsInput');
+        woodcuttingInput.setAttribute('data-storage', 'hwoodcutting');
+        
+        if (localStorage.hwoodcutting === "true") {
+            woodcuttingInput.setAttribute('checked', 'checked');
+        }
+        woodcuttingInput.addEventListener("change", toggleStorage);
+        
+        let woodcuttingLabel = document.createElement('label');
+        woodcuttingLabel.setAttribute('for', 'checkbox');
+        woodcuttingLabel.innerText = "Woodcutting Notifications";
+
+        woodcuttingInputContainer.append(woodcuttingInput);
+        woodcuttingInputContainer.append(woodcuttingLabel);
+
+        menu.appendChild(woodcuttingInputContainer);
+
+        // Farming Notifications Checkbox
+        let farmingInputContainer = document.createElement('div');
+        farmingInputContainer.setAttribute('class', 'dh3-helper-inputContainer dh3-helper-inputContainer-sub');
+        let farmingInput = document.createElement('input');
+        farmingInput.setAttribute('type', 'checkbox');
+        farmingInput.setAttribute('name', 'dh3-notificationsInput');
+        farmingInput.setAttribute('data-storage', 'hfarming');
+        
+        if (localStorage.hfarming === "true") {
+            farmingInput.setAttribute('checked', 'checked');
+        }
+        farmingInput.addEventListener("change", toggleStorage);
+        
+        let farmingLabel = document.createElement('label');
+        farmingLabel.setAttribute('for', 'checkbox');
+        farmingLabel.innerText = "farming Notifications";
+
+        farmingInputContainer.append(farmingInput);
+        farmingInputContainer.append(farmingLabel);
+
+        menu.appendChild(farmingInputContainer);
+
+        // Combat Notifications Checkbox
+        let combatInputContainer = document.createElement('div');
+        combatInputContainer.setAttribute('class', 'dh3-helper-inputContainer dh3-helper-inputContainer-sub');
+        let combatInput = document.createElement('input');
+        combatInput.setAttribute('type', 'checkbox');
+        combatInput.setAttribute('name', 'dh3-notificationsInput');
+        combatInput.setAttribute('data-storage', 'hcombat');
+        
+        if (localStorage.hcombat === "true") {
+            combatInput.setAttribute('checked', 'checked');
+        }
+        combatInput.addEventListener("change", toggleStorage);
+        
+        let combatLabel = document.createElement('label');
+        combatLabel.setAttribute('for', 'checkbox');
+        combatLabel.innerText = "combat Notifications";
+
+        combatInputContainer.append(combatInput);
+        combatInputContainer.append(combatLabel);
+
+        menu.appendChild(combatInputContainer);
+
         document.body.appendChild(menu);
     }
 
@@ -206,6 +294,62 @@ window.addEventListener("load", function() {
     
         var furnaceTarget = document.getElementById('notification-furnace');
         furnaceObserver.observe(furnaceTarget, { attributes : true, attributeFilter : ['style'] });
+
+        // Stardust Potion
+        var SDPotObserver = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutationRecord) {
+                if (document.getElementById("notification-stardustPotionTimer").style.display === "none") {
+                    if ((localStorage.hNotifications === "true") && (localStorage.hSDPot === "true")) {
+                        var notification = new Notification("Stardust Potion Completed",{ icon: 'images/stardustPotion.png' });
+                    }
+                }
+            });    
+        });
+    
+        var SDPotTarget = document.getElementById('notification-stardustPotionTimer');
+        SDPotObserver.observe(SDPotTarget, { attributes : true, attributeFilter : ['style'] });
+
+        // Woodcutting
+        var woodcuttingObserver = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutationRecord) {
+                if (document.getElementById("notification-woodcuttingReadyNotification").style.display !== "none") {
+                    if ((localStorage.hNotifications === "true") && (localStorage.hwoodcutting === "true")) {
+                        var notification = new Notification("Woodcutting Ready",{ icon: 'images/woodcuttingSkill.png' });
+                    }
+                }
+            });    
+        });
+    
+        var woodcuttingTarget = document.getElementById('notification-woodcuttingReadyNotification');
+        woodcuttingObserver.observe(woodcuttingTarget, { attributes : true, attributeFilter : ['style'] });
+
+        // Farming
+        var farmingObserver = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutationRecord) {
+                if (document.getElementById("notification-farmingReadyNotification").style.display !== "none") {
+                    if ((localStorage.hNotifications === "true") && (localStorage.hfarming === "true")) {
+                        var notification = new Notification("Farming Completed",{ icon: 'images/farmingSkill.png' });
+                    }
+                }
+            });    
+        });
+    
+        var farmingTarget = document.getElementById('notification-farmingReadyNotification');
+        farmingObserver.observe(farmingTarget, { attributes : true, attributeFilter : ['style'] });
+
+        // Combat
+        var combatObserver = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutationRecord) {
+                if (document.getElementById("notification-heroReadyNotification").style.display !== "none") {
+                    if ((localStorage.hNotifications === "true") && (localStorage.hcombat === "true")) {
+                        var notification = new Notification("Combat Ready",{ icon: 'images/combatSkill.png' });
+                    }
+                }
+            });    
+        });
+    
+        var combatTarget = document.getElementById('notification-heroReadyNotification');
+        combatObserver.observe(combatTarget, { attributes : true, attributeFilter : ['style'] });
     }
 });
 
