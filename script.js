@@ -47,6 +47,12 @@ window.addEventListener("load", function() {
                 color: black;
                 text-align: center;
             }
+            #dh3-helper-menu h1 img {
+                margin: 0 10px 0 10px;
+            }
+            #dh3-helper-menu h1 img:nth-child(1) {
+                transform: scaleX(-1);
+            }
             .dh3-helper-headerContainer {
                 text-align: center;
             }
@@ -72,6 +78,19 @@ window.addEventListener("load", function() {
             .dh3-helper-inputContainer label {
                 color: black;
                 font-size: 20px;
+            }
+            .dh3-helper-footer {
+                position: absolute;
+                width: 100%;
+                border-top: 1px solid #e0e0e0;
+                bottom: 0;
+                padding: 10px 0 10px;
+                display: flex;
+                flex-direction: column;
+            }
+            #dh3-helper-menu .dh3-helper-footer span {
+                color: #5a5a5a;
+                padding: 5px;
             }
         `;
         document.head.appendChild(style);
@@ -101,7 +120,13 @@ window.addEventListener("load", function() {
         headerContainer.setAttribute('class', 'dh3-helper-headerContainer');
 
         let header = document.createElement('h1');
+        let headerImage = document.createElement('img');
+        headerImage.setAttribute('src', 'images/santaHatSigil.png');
+        headerImage.setAttribute('class', 'img-50');
+        let headerImage2 = headerImage.cloneNode(true);
         header.innerText = "DH3 Helper";
+        header.insertBefore(headerImage, header.firstChild);
+        header.appendChild(headerImage2);
         headerContainer.appendChild(header);
 
         let version = document.createElement('span');
@@ -216,7 +241,7 @@ window.addEventListener("load", function() {
         
         let farmingLabel = document.createElement('label');
         farmingLabel.setAttribute('for', 'checkbox');
-        farmingLabel.innerText = "farming Notifications";
+        farmingLabel.innerText = "Farming Notifications";
 
         farmingInputContainer.append(farmingInput);
         farmingInputContainer.append(farmingLabel);
@@ -238,12 +263,26 @@ window.addEventListener("load", function() {
         
         let combatLabel = document.createElement('label');
         combatLabel.setAttribute('for', 'checkbox');
-        combatLabel.innerText = "combat Notifications";
+        combatLabel.innerText = "Combat Notifications";
 
         combatInputContainer.append(combatInput);
         combatInputContainer.append(combatLabel);
 
         menu.appendChild(combatInputContainer);
+
+        // Footer
+        let footerContainer = document.createElement('div');
+        footerContainer.setAttribute('class', 'dh3-helper-footer');
+
+        let footerTopText = document.createElement('span');
+        footerTopText.innerText = "Made with love by Level <3";
+        footerContainer.appendChild(footerTopText);
+
+        let footerBottomText = document.createElement('span');
+        footerBottomText.innerHTML = "Found this useful? Please star this <a href='https://github.com/puremana/dh3-helper' target='_blank' rel='noopener noreferer'>repo on Github</a>";
+        footerContainer.appendChild(footerBottomText);
+
+        menu.appendChild(footerContainer);
 
         document.body.appendChild(menu);
     }
