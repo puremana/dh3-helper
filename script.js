@@ -34,7 +34,7 @@ window.addEventListener("load", function() {
                 position: absolute;
                 background: white;
                 width: 700px;
-                height: 777px;
+                height: 820px;
                 max-width: 100%;
                 max-height: 100%;
                 z-index: 10000;
@@ -427,6 +427,29 @@ window.addEventListener("load", function() {
 
         menu.appendChild(barPotInputContainer);
 
+        // Browser Active Potion Notifications Checkbox
+        let browserActiveInputContainer = document.createElement('div');
+        browserActiveInputContainer.setAttribute('class', 'dh3-helper-inputContainer');
+        let browserActiveInput = document.createElement('input');
+        browserActiveInput.setAttribute('type', 'checkbox');
+        browserActiveInput.setAttribute('name', 'dh3-notificationsInput');
+        browserActiveInput.setAttribute('data-storage', 'hbrowserActive');
+        browserActiveInput.setAttribute('title', 'Notifications even if the browser tab is currently active');
+        
+        if (localStorage.hbrowserActive === "true") {
+            browserActiveInput.setAttribute('checked', 'checked');
+        }
+        browserActiveInput.addEventListener("change", toggleStorage);
+        
+        let browserActiveLabel = document.createElement('label');
+        browserActiveLabel.setAttribute('for', 'checkbox');
+        browserActiveLabel.innerText = "Browser Active Notifications";
+
+        browserActiveInputContainer.append(browserActiveInput);
+        browserActiveInputContainer.append(browserActiveLabel);
+
+        menu.appendChild(browserActiveInputContainer);
+
         // Footer
         let footerContainer = document.createElement('div');
         footerContainer.setAttribute('class', 'dh3-helper-footer');
@@ -481,7 +504,7 @@ window.addEventListener("load", function() {
         var furnaceObserver = new MutationObserver(function(mutations) {
             mutations.forEach(function(mutationRecord) {
                 if (document.getElementById("notification-furnace").style.display === "none") {
-                    if ((localStorage.hNotifications === "true") && (localStorage.hFurnace === "true")) {
+                    if ((localStorage.hNotifications === "true") && (document.hidden || (localStorage.hbrowserActive === "true")) && (localStorage.hFurnace === "true")) {
                         var notification = new Notification("Furnace Ready",{ icon: 'images/silverFurnaceOn.gif' });
                     }
                 }
@@ -495,7 +518,7 @@ window.addEventListener("load", function() {
         var woodcuttingObserver = new MutationObserver(function(mutations) {
             mutations.forEach(function(mutationRecord) {
                 if (document.getElementById("notification-woodcuttingReadyNotification").style.display !== "none") {
-                    if ((localStorage.hNotifications === "true") && (localStorage.hwoodcutting === "true")) {
+                    if ((localStorage.hNotifications === "true") && (document.hidden || (localStorage.hbrowserActive === "true")) && (localStorage.hwoodcutting === "true")) {
                         var notification = new Notification("Woodcutting Ready",{ icon: 'images/woodcuttingSkill.png' });
                     }
                 }
@@ -509,7 +532,7 @@ window.addEventListener("load", function() {
         var farmingObserver = new MutationObserver(function(mutations) {
             mutations.forEach(function(mutationRecord) {
                 if (document.getElementById("notification-farmingReadyNotification").style.display !== "none") {
-                    if ((localStorage.hNotifications === "true") && (localStorage.hfarming === "true")) {
+                    if ((localStorage.hNotifications === "true") && (document.hidden || (localStorage.hbrowserActive === "true")) && (localStorage.hfarming === "true")) {
                         var notification = new Notification("Farming Completed",{ icon: 'images/farmingSkill.png' });
                     }
                 }
@@ -523,7 +546,7 @@ window.addEventListener("load", function() {
         var combatObserver = new MutationObserver(function(mutations) {
             mutations.forEach(function(mutationRecord) {
                 if (document.getElementById("notification-heroReadyNotification").style.display !== "none") {
-                    if ((localStorage.hNotifications === "true") && (localStorage.hcombat === "true")) {
+                    if ((localStorage.hNotifications === "true") && (document.hidden || (localStorage.hbrowserActive === "true")) && (localStorage.hcombat === "true")) {
                         var notification = new Notification("Combat Ready",{ icon: 'images/combatSkill.png' });
                     }
                 }
@@ -537,7 +560,7 @@ window.addEventListener("load", function() {
         var oxygenObserver = new MutationObserver(function(mutations) {
             mutations.forEach(function(mutationRecord) {
                 if (document.getElementById("notification-oxygenTankTimer-Ready").style.display !== "none") {
-                    if ((localStorage.hNotifications === "true") && (localStorage.hoxygen === "true")) {
+                    if ((localStorage.hNotifications === "true") && (document.hidden || (localStorage.hbrowserActive === "true")) && (localStorage.hoxygen === "true")) {
                         var notification = new Notification("Oxygen Tank Complete",{ icon: 'images/oxygenTank.png' });
                     }
                 }
@@ -551,7 +574,7 @@ window.addEventListener("load", function() {
         var recipeObserver = new MutationObserver(function(mutations) {
             mutations.forEach(function(mutationRecord) {
                 if (document.getElementById("notification-cooksBookReady").style.display !== "none") {
-                    if ((localStorage.hNotifications === "true") && (localStorage.hrecipe === "true")) {
+                    if ((localStorage.hNotifications === "true") && (document.hidden || (localStorage.hbrowserActive === "true")) && (localStorage.hrecipe === "true")) {
                         var notification = new Notification("Recipe Book Complete",{ icon: 'images/cooksBook1.png' });
                     }
                 }
@@ -565,7 +588,7 @@ window.addEventListener("load", function() {
         var researcherObserver = new MutationObserver(function(mutations) {
             mutations.forEach(function(mutationRecord) {
                 if (document.getElementById("notification-researcherReady").style.display !== "none") {
-                    if ((localStorage.hNotifications === "true") && (localStorage.hresearcher === "true")) {
+                    if ((localStorage.hNotifications === "true") && (document.hidden || (localStorage.hbrowserActive === "true")) && (localStorage.hresearcher === "true")) {
                         var notification = new Notification("Researcher Ready",{ icon: 'images/researcher.png' });
                     }
                 }
@@ -579,7 +602,7 @@ window.addEventListener("load", function() {
         var SDPotObserver = new MutationObserver(function(mutations) {
             mutations.forEach(function(mutationRecord) {
                 if (document.getElementById("notification-stardustPotionTimer").style.display === "none") {
-                    if ((localStorage.hNotifications === "true") && (localStorage.hbrewing === "true") && (localStorage.hSDPot === "true")) {
+                    if ((localStorage.hNotifications === "true") && (document.hidden || (localStorage.hbrowserActive === "true")) && (localStorage.hbrewing === "true") && (localStorage.hSDPot === "true")) {
                         var notification = new Notification("Stardust Potion Completed",{ icon: 'images/stardustPotion.png' });
                     }
                 }
@@ -593,7 +616,7 @@ window.addEventListener("load", function() {
         var compostPotObserver = new MutationObserver(function(mutations) {
             mutations.forEach(function(mutationRecord) {
                 if (document.getElementById("notification-compostPotionTimer").style.display === "none") {
-                    if ((localStorage.hNotifications === "true") && (localStorage.hbrewing === "true") && (localStorage.hcompostPot === "true")) {
+                    if ((localStorage.hNotifications === "true") && (document.hidden || (localStorage.hbrowserActive === "true")) && (localStorage.hbrewing === "true") && (localStorage.hcompostPot === "true")) {
                         var notification = new Notification("Compost Potion Completed",{ icon: 'images/compostPotion.png' });
                     }
                 }
@@ -607,7 +630,7 @@ window.addEventListener("load", function() {
         var bonePotObserver = new MutationObserver(function(mutations) {
             mutations.forEach(function(mutationRecord) {
                 if (document.getElementById("notification-bonePotionTimer").style.display === "none") {
-                    if ((localStorage.hNotifications === "true") && (localStorage.hbrewing === "true") && (localStorage.hbonePot === "true")) {
+                    if ((localStorage.hNotifications === "true") && (document.hidden || (localStorage.hbrowserActive === "true")) && (localStorage.hbrewing === "true") && (localStorage.hbonePot === "true")) {
                         var notification = new Notification("Bone Potion Completed",{ icon: 'images/bonePotion.png' });
                     }
                 }
@@ -621,7 +644,7 @@ window.addEventListener("load", function() {
         var barPotObserver = new MutationObserver(function(mutations) {
             mutations.forEach(function(mutationRecord) {
                 if (document.getElementById("notification-barPotionTimer").style.display === "none") {
-                    if ((localStorage.hNotifications === "true") && (localStorage.hbrewing === "true") && (localStorage.hbarPot === "true")) {
+                    if ((localStorage.hNotifications === "true") && (document.hidden || (localStorage.hbrowserActive === "true")) && (localStorage.hbrewing === "true") && (localStorage.hbarPot === "true")) {
                         var notification = new Notification("Bar Potion Completed",{ icon: 'images/barPotion.png' });
                     }
                 }
