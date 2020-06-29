@@ -34,7 +34,7 @@ window.addEventListener("load", function() {
                 position: absolute;
                 background: white;
                 width: 700px;
-                height: 700px;
+                height: 777px;
                 max-width: 100%;
                 max-height: 100%;
                 z-index: 10000;
@@ -74,6 +74,9 @@ window.addEventListener("load", function() {
             }
             .dh3-helper-inputContainer-sub input[type="checkbox"] {
                 margin-left: 25px;
+            }
+            .dh3-helper-inputContainer-sub-sub input[type="checkbox"] {
+                margin-left: 50px;
             }
             .dh3-helper-inputContainer label {
                 color: black;
@@ -181,28 +184,6 @@ window.addEventListener("load", function() {
         furnaceInputContainer.append(furnaceLabel);
 
         menu.appendChild(furnaceInputContainer);
-
-        // SD Pot Notifications Checkbox
-        let SDPotInputContainer = document.createElement('div');
-        SDPotInputContainer.setAttribute('class', 'dh3-helper-inputContainer dh3-helper-inputContainer-sub');
-        let SDPotInput = document.createElement('input');
-        SDPotInput.setAttribute('type', 'checkbox');
-        SDPotInput.setAttribute('name', 'dh3-notificationsInput');
-        SDPotInput.setAttribute('data-storage', 'hSDPot');
-        
-        if (localStorage.hSDPot === "true") {
-            SDPotInput.setAttribute('checked', 'checked');
-        }
-        SDPotInput.addEventListener("change", toggleStorage);
-        
-        let SDPotLabel = document.createElement('label');
-        SDPotLabel.setAttribute('for', 'checkbox');
-        SDPotLabel.innerText = "SD Pot Notifications";
-
-        SDPotInputContainer.append(SDPotInput);
-        SDPotInputContainer.append(SDPotLabel);
-
-        menu.appendChild(SDPotInputContainer);
 
         // Woodcutting Notifications Checkbox
         let woodcuttingInputContainer = document.createElement('div');
@@ -336,6 +317,116 @@ window.addEventListener("load", function() {
 
         menu.appendChild(researcherInputContainer);
 
+        // Brewing Notifications Checkbox
+        let brewingInputContainer = document.createElement('div');
+        brewingInputContainer.setAttribute('class', 'dh3-helper-inputContainer dh3-helper-inputContainer-sub');
+        let brewingInput = document.createElement('input');
+        brewingInput.setAttribute('type', 'checkbox');
+        brewingInput.setAttribute('name', 'dh3-notificationsInput');
+        brewingInput.setAttribute('data-storage', 'hbrewing');
+        
+        if (localStorage.hbrewing === "true") {
+            brewingInput.setAttribute('checked', 'checked');
+        }
+        brewingInput.addEventListener("change", toggleStorage);
+        
+        let brewingLabel = document.createElement('label');
+        brewingLabel.setAttribute('for', 'checkbox');
+        brewingLabel.innerText = "Brewing Notifications";
+
+        brewingInputContainer.append(brewingInput);
+        brewingInputContainer.append(brewingLabel);
+
+        menu.appendChild(brewingInputContainer);
+
+        // SD Pot Notifications Checkbox
+        let SDPotInputContainer = document.createElement('div');
+        SDPotInputContainer.setAttribute('class', 'dh3-helper-inputContainer dh3-helper-inputContainer-sub-sub');
+        let SDPotInput = document.createElement('input');
+        SDPotInput.setAttribute('type', 'checkbox');
+        SDPotInput.setAttribute('name', 'dh3-notificationsInput');
+        SDPotInput.setAttribute('data-storage', 'hSDPot');
+        
+        if (localStorage.hSDPot === "true") {
+            SDPotInput.setAttribute('checked', 'checked');
+        }
+        SDPotInput.addEventListener("change", toggleStorage);
+        
+        let SDPotLabel = document.createElement('label');
+        SDPotLabel.setAttribute('for', 'checkbox');
+        SDPotLabel.innerText = "SD Pot Notifications";
+
+        SDPotInputContainer.append(SDPotInput);
+        SDPotInputContainer.append(SDPotLabel);
+
+        menu.appendChild(SDPotInputContainer);
+
+        // Compost Potion Notifications Checkbox
+        let compostPotInputContainer = document.createElement('div');
+        compostPotInputContainer.setAttribute('class', 'dh3-helper-inputContainer dh3-helper-inputContainer-sub-sub');
+        let compostPotInput = document.createElement('input');
+        compostPotInput.setAttribute('type', 'checkbox');
+        compostPotInput.setAttribute('name', 'dh3-notificationsInput');
+        compostPotInput.setAttribute('data-storage', 'hcompostPot');
+        
+        if (localStorage.hcompostPot === "true") {
+            compostPotInput.setAttribute('checked', 'checked');
+        }
+        compostPotInput.addEventListener("change", toggleStorage);
+        
+        let compostPotLabel = document.createElement('label');
+        compostPotLabel.setAttribute('for', 'checkbox');
+        compostPotLabel.innerText = "Compost Pot Notifications";
+
+        compostPotInputContainer.append(compostPotInput);
+        compostPotInputContainer.append(compostPotLabel);
+
+        menu.appendChild(compostPotInputContainer);
+
+        // Bone Potion Notifications Checkbox
+        let bonePotInputContainer = document.createElement('div');
+        bonePotInputContainer.setAttribute('class', 'dh3-helper-inputContainer dh3-helper-inputContainer-sub-sub');
+        let bonePotInput = document.createElement('input');
+        bonePotInput.setAttribute('type', 'checkbox');
+        bonePotInput.setAttribute('name', 'dh3-notificationsInput');
+        bonePotInput.setAttribute('data-storage', 'hbonePot');
+        
+        if (localStorage.hbonePot === "true") {
+            bonePotInput.setAttribute('checked', 'checked');
+        }
+        bonePotInput.addEventListener("change", toggleStorage);
+        
+        let bonePotLabel = document.createElement('label');
+        bonePotLabel.setAttribute('for', 'checkbox');
+        bonePotLabel.innerText = "Bone Pot Notifications";
+
+        bonePotInputContainer.append(bonePotInput);
+        bonePotInputContainer.append(bonePotLabel);
+
+        menu.appendChild(bonePotInputContainer);
+
+        // Bar Potion Notifications Checkbox
+        let barPotInputContainer = document.createElement('div');
+        barPotInputContainer.setAttribute('class', 'dh3-helper-inputContainer dh3-helper-inputContainer-sub-sub');
+        let barPotInput = document.createElement('input');
+        barPotInput.setAttribute('type', 'checkbox');
+        barPotInput.setAttribute('name', 'dh3-notificationsInput');
+        barPotInput.setAttribute('data-storage', 'hbarPot');
+        
+        if (localStorage.hbarPot === "true") {
+            barPotInput.setAttribute('checked', 'checked');
+        }
+        barPotInput.addEventListener("change", toggleStorage);
+        
+        let barPotLabel = document.createElement('label');
+        barPotLabel.setAttribute('for', 'checkbox');
+        barPotLabel.innerText = "Bar Pot Notifications";
+
+        barPotInputContainer.append(barPotInput);
+        barPotInputContainer.append(barPotLabel);
+
+        menu.appendChild(barPotInputContainer);
+
         // Footer
         let footerContainer = document.createElement('div');
         footerContainer.setAttribute('class', 'dh3-helper-footer');
@@ -399,20 +490,6 @@ window.addEventListener("load", function() {
     
         var furnaceTarget = document.getElementById('notification-furnace');
         furnaceObserver.observe(furnaceTarget, { attributes : true, attributeFilter : ['style'] });
-
-        // Stardust Potion
-        var SDPotObserver = new MutationObserver(function(mutations) {
-            mutations.forEach(function(mutationRecord) {
-                if (document.getElementById("notification-stardustPotionTimer").style.display === "none") {
-                    if ((localStorage.hNotifications === "true") && (localStorage.hSDPot === "true")) {
-                        var notification = new Notification("Stardust Potion Completed",{ icon: 'images/stardustPotion.png' });
-                    }
-                }
-            });    
-        });
-    
-        var SDPotTarget = document.getElementById('notification-stardustPotionTimer');
-        SDPotObserver.observe(SDPotTarget, { attributes : true, attributeFilter : ['style'] });
 
         // Woodcutting
         var woodcuttingObserver = new MutationObserver(function(mutations) {
@@ -497,6 +574,62 @@ window.addEventListener("load", function() {
     
         var researcherTarget = document.getElementById('notification-researcherReady');
         researcherObserver.observe(researcherTarget, { attributes : true, attributeFilter : ['style'] });
+
+        // Stardust Potion
+        var SDPotObserver = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutationRecord) {
+                if (document.getElementById("notification-stardustPotionTimer").style.display === "none") {
+                    if ((localStorage.hNotifications === "true") && (localStorage.hbrewing === "true") && (localStorage.hSDPot === "true")) {
+                        var notification = new Notification("Stardust Potion Completed",{ icon: 'images/stardustPotion.png' });
+                    }
+                }
+            });    
+        });
+    
+        var SDPotTarget = document.getElementById('notification-stardustPotionTimer');
+        SDPotObserver.observe(SDPotTarget, { attributes : true, attributeFilter : ['style'] });
+
+        // Compost Potion
+        var compostPotObserver = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutationRecord) {
+                if (document.getElementById("notification-compostPotionTimer").style.display === "none") {
+                    if ((localStorage.hNotifications === "true") && (localStorage.hbrewing === "true") && (localStorage.hcompostPot === "true")) {
+                        var notification = new Notification("Compost Potion Completed",{ icon: 'images/compostPotion.png' });
+                    }
+                }
+            });    
+        });
+    
+        var compostPotTarget = document.getElementById('notification-compostPotionTimer');
+        compostPotObserver.observe(compostPotTarget, { attributes : true, attributeFilter : ['style'] });
+
+        // Bone Potion
+        var bonePotObserver = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutationRecord) {
+                if (document.getElementById("notification-bonePotionTimer").style.display === "none") {
+                    if ((localStorage.hNotifications === "true") && (localStorage.hbrewing === "true") && (localStorage.hbonePot === "true")) {
+                        var notification = new Notification("Bone Potion Completed",{ icon: 'images/bonePotion.png' });
+                    }
+                }
+            });    
+        });
+    
+        var bonePotTarget = document.getElementById('notification-bonePotionTimer');
+        bonePotObserver.observe(bonePotTarget, { attributes : true, attributeFilter : ['style'] });
+
+        // Bar Potion
+        var barPotObserver = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutationRecord) {
+                if (document.getElementById("notification-barPotionTimer").style.display === "none") {
+                    if ((localStorage.hNotifications === "true") && (localStorage.hbrewing === "true") && (localStorage.hbarPot === "true")) {
+                        var notification = new Notification("Bar Potion Completed",{ icon: 'images/barPotion.png' });
+                    }
+                }
+            });    
+        });
+    
+        var barPotTarget = document.getElementById('notification-barPotionTimer');
+        barPotObserver.observe(barPotTarget, { attributes : true, attributeFilter : ['style'] });
     }
 });
 
