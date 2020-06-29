@@ -3,6 +3,7 @@
 An extension script to the popular idle game [https://dh3.diamondhunt.co/](https://dh3.diamondhunt.co/) to allow desktop notifications.
 
 ![DH3 Helper Menu Screenshot](screenshots/menu.png)
+![Desktop Notifcation Example](screenshots/notification.png)
 
 ## Features
 
