@@ -270,6 +270,72 @@ window.addEventListener("load", function() {
 
         menu.appendChild(combatInputContainer);
 
+        // Oxygen Tank Notifications Checkbox
+        let oxygenInputContainer = document.createElement('div');
+        oxygenInputContainer.setAttribute('class', 'dh3-helper-inputContainer dh3-helper-inputContainer-sub');
+        let oxygenInput = document.createElement('input');
+        oxygenInput.setAttribute('type', 'checkbox');
+        oxygenInput.setAttribute('name', 'dh3-notificationsInput');
+        oxygenInput.setAttribute('data-storage', 'hoxygen');
+        
+        if (localStorage.hoxygen === "true") {
+            oxygenInput.setAttribute('checked', 'checked');
+        }
+        oxygenInput.addEventListener("change", toggleStorage);
+        
+        let oxygenLabel = document.createElement('label');
+        oxygenLabel.setAttribute('for', 'checkbox');
+        oxygenLabel.innerText = "Oxygen Tank Notifications";
+
+        oxygenInputContainer.append(oxygenInput);
+        oxygenInputContainer.append(oxygenLabel);
+
+        menu.appendChild(oxygenInputContainer);
+
+        // Recipe Book Notifications Checkbox
+        let recipeInputContainer = document.createElement('div');
+        recipeInputContainer.setAttribute('class', 'dh3-helper-inputContainer dh3-helper-inputContainer-sub');
+        let recipeInput = document.createElement('input');
+        recipeInput.setAttribute('type', 'checkbox');
+        recipeInput.setAttribute('name', 'dh3-notificationsInput');
+        recipeInput.setAttribute('data-storage', 'hrecipe');
+        
+        if (localStorage.hrecipe === "true") {
+            recipeInput.setAttribute('checked', 'checked');
+        }
+        recipeInput.addEventListener("change", toggleStorage);
+        
+        let recipeLabel = document.createElement('label');
+        recipeLabel.setAttribute('for', 'checkbox');
+        recipeLabel.innerText = "Recipe Book Notifications";
+
+        recipeInputContainer.append(recipeInput);
+        recipeInputContainer.append(recipeLabel);
+
+        menu.appendChild(recipeInputContainer);
+
+        // Researcher Notifications Checkbox
+        let researcherInputContainer = document.createElement('div');
+        researcherInputContainer.setAttribute('class', 'dh3-helper-inputContainer dh3-helper-inputContainer-sub');
+        let researcherInput = document.createElement('input');
+        researcherInput.setAttribute('type', 'checkbox');
+        researcherInput.setAttribute('name', 'dh3-notificationsInput');
+        researcherInput.setAttribute('data-storage', 'hresearcher');
+        
+        if (localStorage.hresearcher === "true") {
+            researcherInput.setAttribute('checked', 'checked');
+        }
+        researcherInput.addEventListener("change", toggleStorage);
+        
+        let researcherLabel = document.createElement('label');
+        researcherLabel.setAttribute('for', 'checkbox');
+        researcherLabel.innerText = "Researcher Notifications";
+
+        researcherInputContainer.append(researcherInput);
+        researcherInputContainer.append(researcherLabel);
+
+        menu.appendChild(researcherInputContainer);
+
         // Footer
         let footerContainer = document.createElement('div');
         footerContainer.setAttribute('class', 'dh3-helper-footer');
@@ -389,6 +455,48 @@ window.addEventListener("load", function() {
     
         var combatTarget = document.getElementById('notification-heroReadyNotification');
         combatObserver.observe(combatTarget, { attributes : true, attributeFilter : ['style'] });
+
+        // Oxygen Tank
+        var oxygenObserver = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutationRecord) {
+                if (document.getElementById("notification-oxygenTankTimer-Ready").style.display !== "none") {
+                    if ((localStorage.hNotifications === "true") && (localStorage.hoxygen === "true")) {
+                        var notification = new Notification("Oxygen Tank Complete",{ icon: 'images/oxygenTank.png' });
+                    }
+                }
+            });    
+        });
+    
+        var oxygenTarget = document.getElementById('notification-oxygenTankTimer-Ready');
+        oxygenObserver.observe(oxygenTarget, { attributes : true, attributeFilter : ['style'] });
+
+        // Recipe Book
+        var recipeObserver = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutationRecord) {
+                if (document.getElementById("notification-cooksBookReady").style.display !== "none") {
+                    if ((localStorage.hNotifications === "true") && (localStorage.hrecipe === "true")) {
+                        var notification = new Notification("Recipe Book Complete",{ icon: 'images/cooksBook1.png' });
+                    }
+                }
+            });    
+        });
+    
+        var recipeTarget = document.getElementById('notification-cooksBookReady');
+        recipeObserver.observe(recipeTarget, { attributes : true, attributeFilter : ['style'] });
+
+        // Researcher
+        var researcherObserver = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutationRecord) {
+                if (document.getElementById("notification-researcherReady").style.display !== "none") {
+                    if ((localStorage.hNotifications === "true") && (localStorage.hresearcher === "true")) {
+                        var notification = new Notification("Researcher Ready",{ icon: 'images/researcher.png' });
+                    }
+                }
+            });    
+        });
+    
+        var researcherTarget = document.getElementById('notification-researcherReady');
+        researcherObserver.observe(researcherTarget, { attributes : true, attributeFilter : ['style'] });
     }
 });
 
